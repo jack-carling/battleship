@@ -1,7 +1,7 @@
 import React from 'react';
-import styles from './Game.module.scss';
+import styles from '../styles/Game.module.scss';
 
-import Board from '../board/Board';
+import Board from './Board';
 
 export default function Game() {
   return (

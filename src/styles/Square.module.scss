@@ -1,0 +1,11 @@
+div.square {
+  cursor: pointer;
+  width: 35px;
+  height: 35px;
+  background-color: #00b4d8;
+  border: 1px solid #eee;
+}
+
+div.square:hover {
+  opacity: 0.8;
+}

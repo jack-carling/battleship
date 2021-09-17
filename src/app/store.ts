@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import counterReducer from '../features/board/boardSlice';
+import boardReducer from '../features/boardSlice';
+import dragReducer from '../features/dragSlice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
+    board: boardReducer,
+    drag: dragReducer,
   },
 });
 
