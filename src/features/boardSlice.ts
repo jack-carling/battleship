@@ -1,28 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-interface BoardState {
-  board: Board[];
-  moveInProcess: boolean;
-  offset: Offset;
-}
-
-interface Board {
-  index: number;
-  moving: boolean;
-  ship: boolean;
-  target: Target;
-}
-
-interface Offset {
-  n: number;
-  e: number;
-  s: number;
-  w: number;
-}
-interface Target {
-  value: boolean;
-  error: boolean;
-}
+import type { BoardState, Board, Offset } from '../app/interfaces';
 
 const board: Board[] = [];
 const offset: Offset = {
@@ -55,6 +32,7 @@ const boardSlice = createSlice({
   reducers: {
     setMoving: (state, action: PayloadAction<number[]>) => {
       state.moveInProcess = true;
+
       for (let index of action.payload) {
         state.board[index].moving = true;
       }
@@ -68,15 +46,18 @@ const boardSlice = createSlice({
       const result: number[] = [index];
       let error = false;
 
+      // Check if out of bounds north
       for (let i = 1; i <= n; i++) {
         const position = index - 10 * i;
         if (position > 0) {
           result.push(position);
         } else {
           error = true;
+          break;
         }
       }
 
+      // Check if out of bounds east
       for (let i = 1; i <= e; i++) {
         const row = Math.floor(index / 10);
         const position = index + 1 * i;
@@ -84,18 +65,22 @@ const boardSlice = createSlice({
           result.push(position);
         } else {
           error = true;
+          break;
         }
       }
 
+      // Check if out of bounds south
       for (let i = 1; i <= s; i++) {
         const position = index + 10 * i;
         if (position <= 99) {
           result.push(position);
         } else {
           error = true;
+          break;
         }
       }
 
+      // Check if out of bounds west
       for (let i = 1; i <= w; i++) {
         const row = Math.floor(index / 10);
         const position = index - 1 * i;
@@ -103,9 +88,34 @@ const boardSlice = createSlice({
           result.push(position);
         } else {
           error = true;
+          break;
         }
       }
 
+      // Check if any ships are adjacent
+      let check: number[] = [];
+      const set = new Set<number>();
+      result.forEach((index) => {
+        set.add(index - 11);
+        set.add(index - 10);
+        set.add(index - 9);
+        set.add(index - 1);
+        set.add(index + 1);
+        set.add(index + 9);
+        set.add(index + 10);
+        set.add(index + 11);
+      });
+      check = Array.from(set);
+
+      for (let i = 0; i < check.length; i++) {
+        const index = check[i];
+        if (state.board[index]?.ship && !state.board[index].moving) {
+          error = true;
+          break;
+        }
+      }
+
+      // Loop through board to set correct moving values
       for (let i = 0; i < state.board.length; i++) {
         if (result.indexOf(i) !== -1) {
           state.board[i].target.value = true;
@@ -119,6 +129,8 @@ const boardSlice = createSlice({
           state.board[i].target.error = false;
         }
       }
+
+      console.log(result);
     },
   },
 });

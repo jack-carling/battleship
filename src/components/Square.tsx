@@ -1,20 +1,10 @@
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setMoving, setOffset, setTarget } from '../features/boardSlice';
+import type { Board } from '../app/interfaces';
 
 import styles from '../styles/Square.module.scss';
 
-interface Props {
-  index: number;
-  moving: boolean;
-  ship: boolean;
-  target: Target;
-}
-interface Target {
-  value: boolean;
-  error: boolean;
-}
-
-export default function Square({ index, ship, moving, target }: Props) {
+export default function Square({ index, ship, moving, target }: Board) {
   const dispatch = useAppDispatch();
   const { board, moveInProcess } = useAppSelector((state) => state.board);
 
@@ -68,19 +58,17 @@ export default function Square({ index, ship, moving, target }: Props) {
   }
 
   return (
-    <div>
-      <div
-        style={ship ? { backgroundColor: '#ccc' } : {}}
-        draggable="false"
-        className={`
+    <div
+      style={ship ? { backgroundColor: '#ccc' } : {}}
+      draggable="false"
+      className={`
         ${styles.square}
         ${target.value ? styles.target : ''}
         ${target.error ? styles.error : ''}
         ${moving ? styles.moving : ''}
         `}
-        onClick={handleClick}
-        onMouseOver={handleMouseOver}
-      ></div>
-    </div>
+      onClick={handleClick}
+      onMouseOver={handleMouseOver}
+    ></div>
   );
 }
