@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { BoardState, Board, Offset } from '../app/interfaces';
+import type { BoardState, Board, Offset, Position } from '../app/interfaces';
 
 const board: Board[] = [];
+const position: Position = { old: [], new: [] };
 const offset: Offset = {
   n: 0,
   e: 0,
@@ -24,7 +25,7 @@ board[31].ship = true;
 board[41].ship = true;
 board[51].ship = true;
 
-const initialState = { board, moveInProcess: false, offset } as BoardState;
+const initialState = { board, moveInProcess: false, position, offset } as BoardState;
 
 const boardSlice = createSlice({
   name: 'board',
@@ -32,6 +33,7 @@ const boardSlice = createSlice({
   reducers: {
     setMoving: (state, action: PayloadAction<number[]>) => {
       state.moveInProcess = true;
+      state.position.old = [...action.payload];
 
       for (let index of action.payload) {
         state.board[index].moving = true;
@@ -136,10 +138,26 @@ const boardSlice = createSlice({
         }
       }
 
-      console.log(result);
+      state.position.new = [...result];
+    },
+    setPosition: (state) => {
+      const [...oldPosition] = state.position.old;
+      const [...newPosition] = state.position.new;
+      if (state.board.every((square) => !square.target.error)) {
+        for (let index of oldPosition) {
+          state.board[index].moving = false;
+          state.board[index].ship = false;
+        }
+        for (let index of newPosition) {
+          // state.board[index].moving = false;
+          state.board[index].ship = true;
+          state.board[index].target.value = false;
+        }
+        state.moveInProcess = false;
+      }
     },
   },
 });
 
-export const { setMoving, setOffset, setTarget } = boardSlice.actions;
+export const { setMoving, setOffset, setTarget, setPosition } = boardSlice.actions;
 export default boardSlice.reducer;

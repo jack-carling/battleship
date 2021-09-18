@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setMoving, setOffset, setTarget } from '../features/boardSlice';
+import { setMoving, setOffset, setTarget, setPosition } from '../features/boardSlice';
 import type { Board } from '../app/interfaces';
 
 import styles from '../styles/Square.module.scss';
@@ -9,8 +9,11 @@ export default function Square({ index, ship, moving, target }: Board) {
   const { board, moveInProcess } = useAppSelector((state) => state.board);
 
   function handleClick() {
-    if (!ship) return;
-    getShip(index);
+    if (ship && !moveInProcess) {
+      getShip(index);
+    } else if (moveInProcess) {
+      dispatch(setPosition());
+    }
   }
 
   function handleMouseOver() {
@@ -69,8 +72,6 @@ export default function Square({ index, ship, moving, target }: Board) {
         `}
       onClick={handleClick}
       onMouseOver={handleMouseOver}
-    >
-      {index}
-    </div>
+    ></div>
   );
 }
