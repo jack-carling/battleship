@@ -69,6 +69,8 @@ export default function Square({ index, ship, moving, target }: Board) {
         `}
       onClick={handleClick}
       onMouseOver={handleMouseOver}
-    ></div>
+    >
+      {index}
+    </div>
   );
 }

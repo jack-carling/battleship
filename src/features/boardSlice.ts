@@ -49,7 +49,7 @@ const boardSlice = createSlice({
       // Check if out of bounds north
       for (let i = 1; i <= n; i++) {
         const position = index - 10 * i;
-        if (position > 0) {
+        if (position >= 0) {
           result.push(position);
         } else {
           error = true;
@@ -95,15 +95,21 @@ const boardSlice = createSlice({
       // Check if any ships are adjacent
       let check: number[] = [];
       const set = new Set<number>();
+      const isLeftEdge = index % 10 === 0;
+      const isRightEdge = index % 10 === 10 - 1;
       result.forEach((index) => {
-        set.add(index - 11);
+        if (!isLeftEdge) {
+          set.add(index - 11);
+          set.add(index - 1);
+          set.add(index + 9);
+        }
+        if (!isRightEdge) {
+          set.add(index - 9);
+          set.add(index + 1);
+          set.add(index + 11);
+        }
         set.add(index - 10);
-        set.add(index - 9);
-        set.add(index - 1);
-        set.add(index + 1);
-        set.add(index + 9);
         set.add(index + 10);
-        set.add(index + 11);
       });
       check = Array.from(set);
 
