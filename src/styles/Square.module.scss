@@ -1,11 +1,36 @@
 div.square {
-  cursor: pointer;
   width: 35px;
   height: 35px;
   background-color: #00b4d8;
   border: 1px solid #eee;
+  cursor: pointer;
 }
 
-div.square:hover {
+div.moving {
+  background-color: #ccc;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+div.target {
+  background-color: #52b788 !important;
+}
+
+div.error {
+  background-color: #e63946 !important;
+}
+
+div.square:not(.target):hover {
   opacity: 0.8;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 100%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
 }

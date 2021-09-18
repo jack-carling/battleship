@@ -1,12 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import boardReducer from '../features/boardSlice';
-import dragReducer from '../features/dragSlice';
 
 export const store = configureStore({
   reducer: {
     board: boardReducer,
-    drag: dragReducer,
   },
 });
 
