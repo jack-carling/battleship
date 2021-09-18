@@ -32,11 +32,19 @@ export default function Square({ index, ship, moving, target }: Board) {
     }
     while (board[i]?.ship) {
       result.push(i);
+      if (isHorizontal) {
+        const isLeftEdge = i % 10 === 0;
+        if (isLeftEdge) break;
+      }
       i -= distance;
     }
     i = index + distance;
     while (board[i]?.ship) {
       result.push(i);
+      if (isHorizontal) {
+        const isRightEdge = i % 10 === 10 - 1;
+        if (isRightEdge) break;
+      }
       i += distance;
     }
     dispatch(setMoving(result.sort()));

@@ -14,16 +14,27 @@ for (let i = 0; i < 100; i++) {
   board.push({ index: i, ship: false, moving: false, target: { value: false, error: false } });
 }
 
-board[0].ship = true;
-board[1].ship = true;
-board[2].ship = true;
-board[3].ship = true;
-board[4].ship = true;
+board[11].ship = true;
+board[12].ship = true;
+board[13].ship = true;
+board[14].ship = true;
+board[15].ship = true;
 
-board[21].ship = true;
 board[31].ship = true;
 board[41].ship = true;
 board[51].ship = true;
+board[61].ship = true;
+
+board[36].ship = true;
+board[37].ship = true;
+board[38].ship = true;
+
+board[63].ship = true;
+board[73].ship = true;
+board[83].ship = true;
+
+board[76].ship = true;
+board[77].ship = true;
 
 const initialState = { board, moveInProcess: false, position, offset } as BoardState;
 
@@ -97,14 +108,14 @@ const boardSlice = createSlice({
       // Check if any ships are adjacent
       let check: number[] = [];
       const set = new Set<number>();
-      const isLeftEdge = index % 10 === 0;
-      const isRightEdge = index % 10 === 10 - 1;
       result.forEach((index) => {
+        const isLeftEdge = index % 10 === 0;
         if (!isLeftEdge) {
           set.add(index - 11);
           set.add(index - 1);
           set.add(index + 9);
         }
+        const isRightEdge = index % 10 === 10 - 1;
         if (!isRightEdge) {
           set.add(index - 9);
           set.add(index + 1);
@@ -114,6 +125,7 @@ const boardSlice = createSlice({
         set.add(index + 10);
       });
       check = Array.from(set);
+      check = check.filter((value) => value >= 0 && value <= 99);
 
       for (let i = 0; i < check.length; i++) {
         const index = check[i];
@@ -149,7 +161,6 @@ const boardSlice = createSlice({
           state.board[index].ship = false;
         }
         for (let index of newPosition) {
-          // state.board[index].moving = false;
           state.board[index].ship = true;
           state.board[index].target.value = false;
         }
