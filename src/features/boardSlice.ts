@@ -36,7 +36,7 @@ board[83].ship = true;
 board[76].ship = true;
 board[77].ship = true;
 
-const initialState = { board, moveInProcess: false, position, offset } as BoardState;
+const initialState = { board, currentIndex: 0, moveInProcess: false, position, offset } as BoardState;
 
 const boardSlice = createSlice({
   name: 'board',
@@ -167,8 +167,23 @@ const boardSlice = createSlice({
         state.moveInProcess = false;
       }
     },
+    rotate: (state) => {
+      let { n, e, s, w } = state.offset;
+      const previousN = n;
+      const previousE = e;
+      const previousS = s;
+      const previousW = w;
+      n = previousW;
+      e = previousS;
+      s = previousE;
+      w = previousN;
+      state.offset = { n, e, s, w };
+    },
+    setCurrentIndex: (state, action: PayloadAction<number>) => {
+      state.currentIndex = action.payload;
+    },
   },
 });
 
-export const { setMoving, setOffset, setTarget, setPosition } = boardSlice.actions;
+export const { setMoving, setOffset, setTarget, setPosition, rotate, setCurrentIndex } = boardSlice.actions;
 export default boardSlice.reducer;

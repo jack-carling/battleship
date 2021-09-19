@@ -1,5 +1,6 @@
 export interface BoardState {
   board: Board[];
+  currentIndex: number;
   moveInProcess: boolean;
   position: Position;
   offset: Offset;

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setMoving, setOffset, setTarget, setPosition } from '../features/boardSlice';
+import { setMoving, setOffset, setTarget, setPosition, setCurrentIndex } from '../features/boardSlice';
 import type { Board } from '../app/interfaces';
 
 import styles from '../styles/Square.module.scss';
@@ -11,6 +11,7 @@ export default function Square({ index, ship, moving, target }: Board) {
   function handleClick() {
     if (ship && !moveInProcess) {
       getShip(index);
+      dispatch(setCurrentIndex(index));
     } else if (moveInProcess) {
       dispatch(setPosition());
     }
@@ -18,6 +19,7 @@ export default function Square({ index, ship, moving, target }: Board) {
 
   function handleMouseOver() {
     if (!moveInProcess) return;
+    dispatch(setCurrentIndex(index));
     dispatch(setTarget(index));
   }
 
@@ -26,7 +28,13 @@ export default function Square({ index, ship, moving, target }: Board) {
     let i = index;
     let distance = 1;
     let isHorizontal = true;
-    if (!board[i - 1]?.ship && !board[i + 1]?.ship) {
+    const isLeftEdge = i % 10 === 0;
+    const isRightEdge = i % 10 === 10 - 1;
+    if (
+      (isLeftEdge && !board[i + 1]?.ship) ||
+      (!board[i - 1]?.ship && !board[i + 1]?.ship) ||
+      (isRightEdge && !board[i - 1]?.ship)
+    ) {
       distance = 10;
       isHorizontal = false;
     }
@@ -40,11 +48,11 @@ export default function Square({ index, ship, moving, target }: Board) {
     }
     i = index + distance;
     while (board[i]?.ship) {
-      result.push(i);
       if (isHorizontal) {
-        const isRightEdge = i % 10 === 10 - 1;
+        const isRightEdge = (i - 1) % 10 === 10 - 1;
         if (isRightEdge) break;
       }
+      result.push(i);
       i += distance;
     }
     dispatch(setMoving(result.sort()));
