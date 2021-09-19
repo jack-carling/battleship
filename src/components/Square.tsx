@@ -12,7 +12,6 @@ export default function Square({ index, ship, moving, target }: Board) {
     if (ship && !moveInProcess) {
       getShip(index);
       dispatch(setCurrentIndex(index));
-      dispatch(setTarget(index));
     } else if (moveInProcess) {
       dispatch(setPosition());
     }
@@ -56,8 +55,12 @@ export default function Square({ index, ship, moving, target }: Board) {
       result.push(i);
       i += distance;
     }
-    dispatch(setMoving(result.sort()));
-    calculateOffset(index, result.sort(), isHorizontal);
+    dispatch(setMoving(result));
+    calculateOffset(
+      index,
+      result.sort((a, b) => a - b),
+      isHorizontal
+    );
   }
 
   function calculateOffset(index: number, array: number[], isHorizontal: boolean) {
@@ -67,6 +70,7 @@ export default function Square({ index, ship, moving, target }: Board) {
     let w = 0;
     const offsetStart = array.indexOf(index);
     const offsetEnd = array.length - offsetStart - 1;
+
     if (isHorizontal) {
       w = offsetStart;
       e = offsetEnd;
@@ -75,6 +79,7 @@ export default function Square({ index, ship, moving, target }: Board) {
       s = offsetEnd;
     }
     dispatch(setOffset({ n, e, s, w }));
+    dispatch(setTarget(index));
   }
 
   return (

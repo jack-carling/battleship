@@ -5,6 +5,12 @@ section.game {
   padding: 3rem;
 }
 
+section.boards {
+  display: grid;
+  grid-template-columns: repeat(2, 350px);
+  gap: 2rem;
+}
+
 img.logo {
   max-width: 300px;
 }

@@ -137,7 +137,7 @@ const boardSlice = createSlice({
 
       // Loop through board to set correct moving values
       for (let i = 0; i < state.board.length; i++) {
-        if (result.indexOf(i) !== -1) {
+        if (result.includes(i)) {
           state.board[i].target.value = true;
           if (error) {
             state.board[i].target.error = true;
