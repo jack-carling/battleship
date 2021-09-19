@@ -1,5 +1,10 @@
 section.game {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: 3rem;
+}
+
+img.logo {
+  max-width: 300px;
 }
