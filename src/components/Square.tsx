@@ -12,6 +12,7 @@ export default function Square({ index, ship, moving, target }: Board) {
     if (ship && !moveInProcess) {
       getShip(index);
       dispatch(setCurrentIndex(index));
+      dispatch(setTarget(index));
     } else if (moveInProcess) {
       dispatch(setPosition());
     }
