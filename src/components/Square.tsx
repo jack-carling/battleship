@@ -7,8 +7,10 @@ import styles from '../styles/Square.module.scss';
 export default function Square({ index, ship, moving, target }: Board) {
   const dispatch = useAppDispatch();
   const { board, moveInProcess } = useAppSelector((state) => state.board);
+  const { ready } = useAppSelector((state) => state.game);
 
   function handleClick() {
+    if (ready) return;
     if (ship && !moveInProcess) {
       getShip(index);
       dispatch(setCurrentIndex(index));
@@ -91,6 +93,7 @@ export default function Square({ index, ship, moving, target }: Board) {
         ${target.value ? styles.target : ''}
         ${target.error ? styles.error : ''}
         ${moving ? styles.moving : ''}
+        ${ready ? styles.ready : ''}
         `}
       onClick={handleClick}
       onMouseOver={handleMouseOver}

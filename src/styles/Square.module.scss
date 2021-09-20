@@ -1,26 +1,32 @@
+@import './_variables.scss';
+
 div.square {
   width: 35px;
   height: 35px;
-  background-color: #00b4d8;
-  border: 1px solid #eee;
+  background-color: $water;
+  border: 1px solid $background;
   cursor: pointer;
 }
 
 div.moving {
-  background-color: #ccc;
+  background-color: $ship;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 div.target {
-  background-color: #52b788 !important;
+  background-color: $green !important;
 }
 
 div.error {
-  background-color: #e63946 !important;
+  background-color: $red !important;
 }
 
 div.square:not(.target):hover {
   opacity: 0.8;
+}
+
+div.ready {
+  pointer-events: none;
 }
 
 @keyframes pulse {

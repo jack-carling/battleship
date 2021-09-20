@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Khand:wght@700&display=swap');
+@import './styles/_variables.scss';
 
 * {
   box-sizing: border-box;
@@ -8,7 +9,7 @@
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #eee;
+  background-color: $background;
   width: 100vw;
   height: 100vh;
   margin: 0;

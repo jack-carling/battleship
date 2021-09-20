@@ -1,6 +1,50 @@
+@import './_variables.scss';
+
 section.info {
-  border: 1px solid #ccc;
+  border: 1px solid $ship;
   border-radius: 0.5rem;
   padding: 1rem;
   grid-column: 1 / 3;
+  button {
+    font-family: 'Khand', sans-serif;
+    color: $background;
+    cursor: pointer;
+    background-color: $water;
+    display: block;
+    margin-top: 1rem;
+    appearance: none;
+    border: none;
+    outline: none;
+    padding: 0.2rem 1rem;
+    border-radius: 999px;
+  }
+  button:hover {
+    opacity: 0.8;
+  }
+}
+
+span.header {
+  font-family: 'Khand', sans-serif;
+  text-transform: uppercase;
+  color: $text;
+  display: block;
+}
+
+div.loading {
+  border: 5px solid $ship; /* Light grey */
+  border-top: 5px solid $water; /* Blue */
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 1rem 0;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

@@ -29,3 +29,7 @@ export interface Position {
   old: number[];
   new: number[];
 }
+
+export interface GameState {
+  ready: boolean;
+}
