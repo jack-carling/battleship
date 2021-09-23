@@ -1,10 +1,22 @@
-![](https://user-images.githubusercontent.com/72305598/134335664-bd03cc36-3a0a-473c-8925-a929939c2d61.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/72305598/134335664-bd03cc36-3a0a-473c-8925-a929939c2d61.png" />
+</p>
 
 ## About
 
 ⚠️ WORK IN PROGRESS ⚠️
 
 Interpretation of the classic game Battleship
+
+## Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Run development server
+npm start
+```
 
 ## Todo
 
