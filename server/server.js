@@ -11,6 +11,7 @@ app.get('/sse', (req, res) => {
   res.set({
     'Content-Type': 'text/event-stream',
     'Cache-Control': 'no-cache',
+    'Cache-Control': 'no-transform',
   });
 
   req.on('close', () => {
