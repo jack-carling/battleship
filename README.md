@@ -14,8 +14,11 @@ Interpretation of the classic game Battleship
 # Install dependencies
 npm install
 
-# Run development server
+# Terminal 1: Run development server for frontend
 npm start
+
+# Terminal 2: Run backend server
+npm run server
 ```
 
 ## Todo
