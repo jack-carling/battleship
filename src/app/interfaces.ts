@@ -31,5 +31,8 @@ export interface Position {
 }
 
 export interface GameState {
+  id: string;
   ready: boolean;
+  room: string;
+  disconnect: boolean;
 }
