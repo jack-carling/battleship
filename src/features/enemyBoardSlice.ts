@@ -20,8 +20,12 @@ const enemyBoardSlice = createSlice({
       });
       state.board = [...board];
     },
+    setClick: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      state.board[index].click = true;
+    },
   },
 });
 
-export const { setShips } = enemyBoardSlice.actions;
+export const { setShips, setClick } = enemyBoardSlice.actions;
 export default enemyBoardSlice.reducer;

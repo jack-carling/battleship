@@ -22,7 +22,7 @@ app.get('/sse', (req, res) => {
   req.on('close', () => {
     const room = connections[id].room;
     delete connections[id];
-    ready = ready.filter((id) => id !== id);
+    ready = ready.filter((connection) => connection.id !== id);
     if (room) {
       const playerOne = rooms[room]?.playerOne;
       const playerTwo = rooms[room]?.playerTwo;

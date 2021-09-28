@@ -18,9 +18,9 @@ export interface EnemyBoardState {
 }
 
 export interface EnemyBoard {
+  click: boolean;
   index: number;
   ship: boolean;
-  click: boolean;
 }
 
 interface Target {
