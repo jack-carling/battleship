@@ -10,6 +10,7 @@ export interface Board {
   index: number;
   moving: boolean;
   ship: boolean;
+  shot: boolean;
   target: Target;
 }
 

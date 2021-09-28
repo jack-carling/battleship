@@ -4,7 +4,7 @@ import type { Board } from '../app/interfaces';
 
 import styles from '../styles/Square.module.scss';
 
-export default function Square({ index, ship, moving, target }: Board) {
+export default function Square({ index, ship, moving, shot, target }: Board) {
   const dispatch = useAppDispatch();
   const { board, moveInProcess } = useAppSelector((state) => state.board);
   const { ready } = useAppSelector((state) => state.game);
@@ -97,6 +97,8 @@ export default function Square({ index, ship, moving, target }: Board) {
         `}
       onClick={handleClick}
       onMouseOver={handleMouseOver}
-    ></div>
+    >
+      <div className={`${shot ? styles.click : ''} ${ship ? styles.ship : ''}`}></div>
+    </div>
   );
 }

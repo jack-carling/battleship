@@ -53,6 +53,28 @@ app.post('/sse/ready', (req, res) => {
   res.send({ success: true });
 });
 
+app.post('/sse/shot', (req, res) => {
+  const { id, index, room } = req.body;
+  const otherPlayer = getOtherPlayer(room, id);
+  const message = JSON.stringify({ shot: true, index });
+  connections[otherPlayer].write(`data: ${message} \n\n`);
+  res.send({ success: true });
+});
+
+app.post('/sse/switch-turns', (req, res) => {
+  const { id, room } = req.body;
+  const otherPlayer = getOtherPlayer(room, id);
+  const message = JSON.stringify({ switch: true });
+  connections[otherPlayer].write(`data: ${message} \n\n`);
+  res.send({ success: true });
+});
+
+function getOtherPlayer(room, id) {
+  const players = Object.values(rooms[room]);
+  const currentPlayer = players.indexOf(id);
+  return currentPlayer === 0 ? players[1] : players[0];
+}
+
 function getOpponent() {
   if (ready.length > 1) {
     const id = uuidv4();

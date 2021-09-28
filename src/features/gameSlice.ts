@@ -22,8 +22,11 @@ const gameSlice = createSlice({
     setCurrentTurn: (state, action: PayloadAction<boolean>) => {
       state.currentTurn = action.payload;
     },
+    switchCurrentTurn: (state) => {
+      state.currentTurn = !state.currentTurn;
+    },
   },
 });
 
-export const { setReady, setID, setRoom, disconnect, setCurrentTurn } = gameSlice.actions;
+export const { setReady, setID, setRoom, disconnect, setCurrentTurn, switchCurrentTurn } = gameSlice.actions;
 export default gameSlice.reducer;

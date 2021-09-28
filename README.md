@@ -32,9 +32,9 @@ npm run server
 - [x] Backend: set up Server Sent Events (SSE)
 - [x] Backend: handle connection on ready
 - [x] Backend: share board information on connection
-- [ ] Disable opponent's board before being ready and connected
-- [ ] Backend: handle actions and turns
-- [ ] Turn based available and disabled actions
+- [x] Disable opponent's board before being ready and connected
+- [x] Backend: handle actions and turns
+- [x] Turn based available and disabled actions
 - [ ] Handle win/loss
 
 ## Nice to have

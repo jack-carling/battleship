@@ -10,6 +10,8 @@ export default function Game() {
     <section className={styles.game}>
       <img src={logo} className={styles.logo} alt="Logo" />
       <section className={styles.boards}>
+        <div className={styles.info}>You</div>
+        <div className={styles.info}>Opponent</div>
         <Board />
         <EnemyBoard />
         <Info />

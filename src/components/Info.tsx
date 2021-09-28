@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { setReady } from '../features/gameSlice';
 import styles from '../styles/Info.module.scss';
@@ -8,25 +8,26 @@ export default function Info() {
   const { board } = useAppSelector((state) => state.board);
   const { id, ready, room, disconnect, currentTurn } = useAppSelector((state) => state.game);
 
+  const handleReady = useCallback(async () => {
+    const ships: number[] = [];
+    board.forEach((square) => {
+      if (square.ship) ships.push(square.index);
+    });
+    const data = JSON.stringify({ id, ships });
+    await fetch('/sse/ready', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: data,
+    });
+  }, [board, id]);
+
   useEffect(() => {
-    if (ready) {
+    if (ready && !room) {
       handleReady();
     }
-    async function handleReady() {
-      const ships: number[] = [];
-      board.forEach((square) => {
-        if (square.ship) ships.push(square.index);
-      });
-      const data = JSON.stringify({ id, ships });
-      await fetch('/sse/ready', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: data,
-      });
-    }
-  }, [id, ready, board]);
+  }, [ready, room, handleReady]);
 
   if (!ready) {
     return (

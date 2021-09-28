@@ -11,7 +11,7 @@ const offset: Offset = {
 };
 
 for (let i = 0; i < 100; i++) {
-  board.push({ index: i, ship: false, moving: false, target: { value: false, error: false } });
+  board.push({ index: i, ship: false, moving: false, shot: false, target: { value: false, error: false } });
 }
 
 board[11].ship = true;
@@ -182,8 +182,12 @@ const boardSlice = createSlice({
     setCurrentIndex: (state, action: PayloadAction<number>) => {
       state.currentIndex = action.payload;
     },
+    handleShot: (state, action: PayloadAction<number>) => {
+      const index = action.payload;
+      state.board[index].shot = true;
+    },
   },
 });
 
-export const { setMoving, setOffset, setTarget, setPosition, rotate, setCurrentIndex } = boardSlice.actions;
+export const { setMoving, setOffset, setTarget, setPosition, rotate, setCurrentIndex, handleShot } = boardSlice.actions;
 export default boardSlice.reducer;

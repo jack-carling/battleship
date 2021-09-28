@@ -1,3 +1,5 @@
+@import './_variables.scss';
+
 section.game {
   display: flex;
   flex-direction: column;
@@ -8,9 +10,21 @@ section.game {
 section.boards {
   display: grid;
   grid-template-columns: repeat(2, 350px);
-  gap: 2rem;
+  column-gap: 2rem;
 }
 
 img.logo {
   max-width: 300px;
+}
+
+div.info {
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  color: $text;
+  font-family: 'Khand', sans-serif;
+  display: flex;
+}
+
+div.info:nth-child(2) {
+  justify-content: flex-end;
 }
