@@ -2,6 +2,8 @@ const { v4: uuidv4 } = require('uuid');
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 let connections = {};
 let rooms = {};
 let ready = [];
@@ -44,8 +46,9 @@ app.get('/sse', (req, res) => {
 });
 
 app.post('/sse/ready', (req, res) => {
-  const id = req.query.id;
-  ready.push(id);
+  const id = req.body.id;
+  const ships = req.body.ships;
+  ready.push({ id, ships });
   getOpponent();
   res.send({ success: true });
 });
@@ -53,15 +56,18 @@ app.post('/sse/ready', (req, res) => {
 function getOpponent() {
   if (ready.length > 1) {
     const id = uuidv4();
-    const playerOne = ready[0];
-    const playerTwo = ready[1];
+    const playerOne = ready[0].id;
+    const playerTwo = ready[1].id;
+    const playerOneShips = ready[0].ships;
+    const playerTwoShips = ready[1].ships;
     connections[playerOne].room = id;
     connections[playerTwo].room = id;
     rooms[id] = { playerOne, playerTwo };
     ready.splice(0, 2);
-    const message = JSON.stringify({ id, ready: true });
-    connections[playerOne].write(`data: ${message} \n\n`);
-    connections[playerTwo].write(`data: ${message} \n\n`);
+    const messageOne = JSON.stringify({ id, ready: true, currentTurn: true, ships: playerTwoShips });
+    const messageTwo = JSON.stringify({ id, ready: true, currentTurn: false, ships: playerOneShips });
+    connections[playerOne].write(`data: ${messageOne} \n\n`);
+    connections[playerTwo].write(`data: ${messageTwo} \n\n`);
   }
 }
 

@@ -1,13 +1,16 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from './app/hooks';
 import Game from './components/Game';
-import { setID, setRoom, disconnect } from './features/gameSlice';
+import { setID, setRoom, disconnect, setCurrentTurn } from './features/gameSlice';
+import { setShips } from './features/enemyBoardSlice';
 
 interface EventData {
   id?: string;
   initial?: boolean;
   ready?: boolean;
   disconnect?: boolean;
+  currentTurn?: boolean;
+  ships?: number[];
 }
 
 function App() {
@@ -23,6 +26,8 @@ function App() {
       }
       if (data.ready) {
         if (data.id) dispatch(setRoom(data.id));
+        if (data.currentTurn !== undefined) dispatch(setCurrentTurn(data.currentTurn));
+        if (data.ships?.length) dispatch(setShips(data.ships));
       }
       if (data.disconnect) {
         dispatch(disconnect());

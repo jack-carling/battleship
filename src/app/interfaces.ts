@@ -13,6 +13,16 @@ export interface Board {
   target: Target;
 }
 
+export interface EnemyBoardState {
+  board: EnemyBoard[];
+}
+
+export interface EnemyBoard {
+  index: number;
+  ship: boolean;
+  click: boolean;
+}
+
 interface Target {
   value: boolean;
   error: boolean;
@@ -35,4 +45,5 @@ export interface GameState {
   ready: boolean;
   room: string;
   disconnect: boolean;
+  currentTurn: boolean;
 }

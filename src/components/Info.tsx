@@ -5,16 +5,28 @@ import styles from '../styles/Info.module.scss';
 
 export default function Info() {
   const dispatch = useAppDispatch();
-  const { id, ready, room, disconnect } = useAppSelector((state) => state.game);
+  const { board } = useAppSelector((state) => state.board);
+  const { id, ready, room, disconnect, currentTurn } = useAppSelector((state) => state.game);
 
   useEffect(() => {
     if (ready) {
       handleReady();
     }
     async function handleReady() {
-      await fetch(`/sse/ready?id=${id}`, { method: 'POST' });
+      const ships: number[] = [];
+      board.forEach((square) => {
+        if (square.ship) ships.push(square.index);
+      });
+      const data = JSON.stringify({ id, ships });
+      await fetch('/sse/ready', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: data,
+      });
     }
-  }, [id, ready]);
+  }, [id, ready, board]);
 
   if (!ready) {
     return (
@@ -37,7 +49,7 @@ export default function Info() {
   } else if (room) {
     return (
       <section className={styles.info}>
-        <span className={styles.header}>Let's go!</span>
+        <span className={styles.header}>{currentTurn ? `Let's go!` : `It's your opponent's turn...`}</span>
       </section>
     );
   } else {

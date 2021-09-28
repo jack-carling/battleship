@@ -1,4 +1,10 @@
 section.board {
   display: grid;
   grid-template-columns: repeat(10, max-content);
+  transition: opacity 0.3s ease-in-out;
+}
+
+section.turn {
+  opacity: 0.5;
+  pointer-events: none;
 }

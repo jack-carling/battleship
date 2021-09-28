@@ -29,10 +29,10 @@ npm run server
 - [x] Place ships in new positions
 - [x] Handle invalid placements of ships (adjacent of other ships, out of bounds)
 - [x] Disable board when ready
-- [ ] Backend: set up Server Sent Events (SSE)
-- [ ] Backend: handle connection on ready
+- [x] Backend: set up Server Sent Events (SSE)
+- [x] Backend: handle connection on ready
+- [x] Backend: share board information on connection
 - [ ] Disable opponent's board before being ready and connected
-- [ ] Backend: share board information on connection
 - [ ] Backend: handle actions and turns
 - [ ] Turn based available and disabled actions
 - [ ] Handle win/loss
