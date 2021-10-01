@@ -15,7 +15,7 @@ Interpretation of the classic game Battleship
 npm install
 
 # Terminal 1: Run development server for frontend
-npm start
+npm run dev
 
 # Terminal 2: Run backend server
 npm run server
