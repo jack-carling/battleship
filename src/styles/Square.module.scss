@@ -10,8 +10,7 @@ div.square {
 }
 
 div.moving {
-  background-color: $ship;
-  animation: pulse 1.5s ease-in-out infinite;
+  background-color: $water-tint !important;
 }
 
 div.target {
@@ -52,18 +51,6 @@ div.click.ship {
   width: 20px;
   height: 20px;
   animation: hit 0.2s ease 1;
-}
-
-@keyframes pulse {
-  0% {
-    opacity: 100%;
-  }
-  50% {
-    opacity: 50%;
-  }
-  100% {
-    opacity: 100%;
-  }
 }
 
 @keyframes miss {
