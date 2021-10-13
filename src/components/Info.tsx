@@ -50,7 +50,13 @@ export default function Info() {
   } else if (room) {
     return (
       <section className={styles.info}>
-        <span className={styles.header}>{currentTurn ? `Let's go!` : `It's your opponent's turn...`}</span>
+        <span className={styles.header}>Current turn: {currentTurn ? `You` : `Opponent`}</span>
+        {currentTurn && (
+          <span>
+            Click on the enemy board to place your shot. You may go again if you hit a ship, indicated by a red circle.
+          </span>
+        )}
+        {!currentTurn && <span>Please wait for the opponent to make a move.</span>}
       </section>
     );
   } else {

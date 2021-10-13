@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../app/hooks';
-import { setClick } from '../features/enemyBoardSlice';
+import { incrementCount, setClick } from '../features/enemyBoardSlice';
 import { switchCurrentTurn } from '../features/gameSlice';
 import type { EnemyBoard } from '../app/interfaces';
 
@@ -12,9 +12,8 @@ export default function EnemySquare({ click, index, ship }: EnemyBoard) {
   async function handleClick() {
     if (click) return;
     if (ship) {
-      // Hit a ship - current player goes again
+      dispatch(incrementCount());
     } else {
-      // Missed - switch turns
       const data = JSON.stringify({ id, room });
       await fetch('/sse/switch-turns', {
         method: 'POST',

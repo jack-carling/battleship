@@ -19,12 +19,19 @@ img.logo {
 
 div.info {
   margin-bottom: 0.5rem;
-  text-transform: uppercase;
-  color: $text;
-  font-family: 'Khand', sans-serif;
   display: flex;
-}
-
-div.info:nth-child(2) {
-  justify-content: flex-end;
+  justify-content: space-between;
+  span {
+    text-transform: uppercase;
+    color: $text;
+    font-family: 'Khand', sans-serif;
+  }
+  span:last-of-type {
+    display: flex;
+    align-items: center;
+    i {
+      color: $red;
+      margin-right: 0.5rem;
+    }
+  }
 }

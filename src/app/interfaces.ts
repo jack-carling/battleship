@@ -1,5 +1,6 @@
 export interface BoardState {
   board: Board[];
+  count: number;
   currentIndex: number;
   moveInProcess: boolean;
   position: Position;
@@ -16,6 +17,7 @@ export interface Board {
 
 export interface EnemyBoardState {
   board: EnemyBoard[];
+  enemyCount: number;
 }
 
 export interface EnemyBoard {

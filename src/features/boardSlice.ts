@@ -36,7 +36,7 @@ board[83].ship = true;
 board[76].ship = true;
 board[77].ship = true;
 
-const initialState = { board, currentIndex: 0, moveInProcess: false, position, offset } as BoardState;
+const initialState = { board, currentIndex: 0, moveInProcess: false, position, offset, count: 0 } as BoardState;
 
 const boardSlice = createSlice({
   name: 'board',
@@ -185,6 +185,9 @@ const boardSlice = createSlice({
     handleShot: (state, action: PayloadAction<number>) => {
       const index = action.payload;
       state.board[index].shot = true;
+      if (state.board[index].ship) {
+        state.count++;
+      }
     },
   },
 });
