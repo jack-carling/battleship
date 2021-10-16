@@ -7,7 +7,7 @@ import Square from './Square';
 export default function Board() {
   const dispatch = useAppDispatch();
   const { board, currentIndex, moveInProcess } = useAppSelector((state) => state.board);
-  const { currentTurn } = useAppSelector((state) => state.game);
+  const { currentTurn, gameOver } = useAppSelector((state) => state.game);
 
   const handleKeyUp = useCallback(
     (e: KeyboardEvent) => {
@@ -27,7 +27,7 @@ export default function Board() {
   }, [currentIndex, moveInProcess, handleKeyUp]);
 
   return (
-    <section className={`${styles.board} ${currentTurn ? styles.turn : ''}`}>
+    <section className={`${styles.board} ${currentTurn ? styles.turn : ''} ${gameOver ? styles.gameOver : ''}`}>
       {board.map((square, index) => (
         <Square key={index} {...square} />
       ))}

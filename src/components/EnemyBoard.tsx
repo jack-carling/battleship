@@ -5,10 +5,12 @@ import EnemySquare from './EnemySquare';
 
 export default function EnemyBoard() {
   const { board } = useAppSelector((state) => state.enemyBoard);
-  const { currentTurn } = useAppSelector((state) => state.game);
+  const { currentTurn, gameOver } = useAppSelector((state) => state.game);
 
   return (
-    <section className={`${styles.board} ${currentTurn ? '' : styles.turn}`}>
+    <section
+      className={`${styles.board} ${currentTurn && !gameOver ? '' : styles.turn} ${gameOver ? styles.gameOver : ''}`}
+    >
       {board.map((square, index) => (
         <EnemySquare key={index} {...square} />
       ))}

@@ -1,15 +1,25 @@
 import styles from '../styles/Game.module.scss';
 import logo from '../assets/logo.png';
 
-import { useAppSelector } from '../app/hooks';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 
 import Board from './Board';
 import EnemyBoard from './EnemyBoard';
 import Info from './Info';
+import { useEffect } from 'react';
+import { setGameOver } from '../features/gameSlice';
 
 export default function Game() {
+  const dispatch = useAppDispatch();
   const { enemyCount } = useAppSelector((state) => state.enemyBoard);
   const { count } = useAppSelector((state) => state.board);
+
+  useEffect(() => {
+    if (enemyCount === 17 || count === 17) {
+      dispatch(setGameOver());
+    }
+  }, [enemyCount, count, dispatch]);
+
   return (
     <section className={styles.game}>
       <img src={logo} className={styles.logo} alt="Logo" />

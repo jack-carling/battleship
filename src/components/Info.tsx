@@ -5,8 +5,8 @@ import styles from '../styles/Info.module.scss';
 
 export default function Info() {
   const dispatch = useAppDispatch();
-  const { board } = useAppSelector((state) => state.board);
-  const { id, ready, room, disconnect, currentTurn } = useAppSelector((state) => state.game);
+  const { board, count } = useAppSelector((state) => state.board);
+  const { id, ready, room, disconnect, currentTurn, gameOver } = useAppSelector((state) => state.game);
 
   const handleReady = useCallback(async () => {
     const ships: number[] = [];
@@ -39,6 +39,15 @@ export default function Info() {
           when highlighted and click to place the ship in its new position. When done arranging click the ready button.
         </span>
         <button onClick={() => dispatch(setReady())}>READY</button>
+      </section>
+    );
+  } else if (gameOver) {
+    return (
+      <section className={styles.info}>
+        <span className={styles.header}>Game Over</span>
+        {count === 17 && <span>You lost!</span>}
+        {count !== 17 && <span>You won!</span>}
+        <button onClick={() => window.location.reload()}>PLAY AGAIN</button>
       </section>
     );
   } else if (disconnect) {

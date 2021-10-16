@@ -1,7 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { GameState } from '../app/interfaces';
 
-const initialState = { id: '', ready: false, room: '', disconnect: false, currentTurn: false } as GameState;
+const initialState = {
+  id: '',
+  ready: false,
+  room: '',
+  disconnect: false,
+  currentTurn: false,
+  gameOver: false,
+} as GameState;
 
 const gameSlice = createSlice({
   name: 'game',
@@ -25,8 +32,12 @@ const gameSlice = createSlice({
     switchCurrentTurn: (state) => {
       state.currentTurn = !state.currentTurn;
     },
+    setGameOver: (state) => {
+      state.gameOver = true;
+    },
   },
 });
 
-export const { setReady, setID, setRoom, disconnect, setCurrentTurn, switchCurrentTurn } = gameSlice.actions;
+export const { setReady, setID, setRoom, disconnect, setCurrentTurn, switchCurrentTurn, setGameOver } =
+  gameSlice.actions;
 export default gameSlice.reducer;

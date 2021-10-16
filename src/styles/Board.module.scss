@@ -8,3 +8,8 @@ section.turn {
   opacity: 0.75;
   pointer-events: none;
 }
+
+section.gameOver {
+  opacity: 1;
+  pointer-events: none;
+}

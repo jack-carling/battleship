@@ -44,6 +44,7 @@ export interface Position {
 }
 
 export interface GameState {
+  gameOver: boolean;
   id: string;
   ready: boolean;
   room: string;

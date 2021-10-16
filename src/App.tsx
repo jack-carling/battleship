@@ -24,7 +24,6 @@ function App() {
     const SSE = new EventSource('/sse');
     SSE.onmessage = function (e: MessageEvent) {
       const data: EventData = JSON.parse(e.data);
-      console.log(data);
       if (data.initial) {
         if (data.id) dispatch(setID(data.id));
       }
