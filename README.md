@@ -2,11 +2,13 @@
 <img src="https://user-images.githubusercontent.com/72305598/134335664-bd03cc36-3a0a-473c-8925-a929939c2d61.png" />
 </p>
 
-## About
+## Demo
 
-⚠️ WORK IN PROGRESS ⚠️
+[Play on Heroku](https://b-ship.herokuapp.com/)
 
-Interpretation of the classic game Battleship
+## Description
+
+Battleship is a strategy type guessing game for two players. It is played on ruled grids on which each player's fleet of battleships are marked. The locations of the fleets are concealed from the other player. Players alternate turns calling "shots" at the other player's ships, and the objective of the game is to destroy the opposing player's fleet.
 
 ## Setup
 
@@ -21,28 +23,6 @@ npm run dev
 npm run server
 ```
 
-## Todo
-
-- [x] Basic UI
-- [x] Move ships
-- [x] Rotate ships
-- [x] Place ships in new positions
-- [x] Handle invalid placements of ships (adjacent of other ships, out of bounds)
-- [x] Disable board when ready
-- [x] Backend: set up Server Sent Events (SSE)
-- [x] Backend: handle connection on ready
-- [x] Backend: share board information on connection
-- [x] Disable opponent's board before being ready and connected
-- [x] Backend: handle actions and turns
-- [x] Turn based available and disabled actions
-- [ ] Handle win/loss
-
-## Nice to have
-
-- [ ] User can connect and play against another user with a specific access code
-- [ ] User name input
-- [ ] Play against AI
-
 ## Screenshot
 
-![](https://user-images.githubusercontent.com/72305598/134332612-5a41eb0b-7f5d-4eff-ad46-f0a507f1b6f6.png)
+![](https://user-images.githubusercontent.com/72305598/137637652-9759e6f2-33e4-4029-825d-135e176737a7.png)
