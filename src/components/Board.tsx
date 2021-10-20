@@ -13,6 +13,7 @@ export default function Board() {
     (e: KeyboardEvent) => {
       if (e.code !== 'Space') return;
       if (!moveInProcess) return;
+      e.preventDefault();
       dispatch(rotate());
       dispatch(setTarget(currentIndex));
     },
