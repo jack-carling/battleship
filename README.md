@@ -2,10 +2,6 @@
 <img src="https://user-images.githubusercontent.com/72305598/134335664-bd03cc36-3a0a-473c-8925-a929939c2d61.png" />
 </p>
 
-## Demo
-
-[Play on Heroku](https://b-ship.herokuapp.com/)
-
 ## Description
 
 Battleship is a strategy type guessing game for two players. It is played on ruled grids on which each player's fleet of battleships are marked. The locations of the fleets are concealed from the other player. Players alternate turns calling "shots" at the other player's ships, and the objective of the game is to destroy the opposing player's fleet.
